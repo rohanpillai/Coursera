@@ -23,22 +23,14 @@ def solve_it(input_data):
     items.heapify()
     items.DP()
 
-    print '-------'
-    print items.totalValue
-    print items.taken
-    print '-----'
-    # a trivial greedy algorithm for filling the knapsack
-    # it takes items in-order until the knapsack is full
-    value = 0
-    weight = 0
-    taken = [0]*len(items)
+#    print '-------'
+#    print items.totalValue
+#    print items.taken
+#    print '-----'
 
-    for item in items:
-        if weight + item.weight <= capacity:
-            taken[item.index] = 1
-            value += item.value
-            weight += item.weight
-    
+    (value, weight, taken) = items.result()
+
+#    print "---" + str(weight) + "---"
     # prepare the solution in the specified output format
     output_data = str(value) + ' ' + str(0) + '\n'
     output_data += ' '.join(map(str, taken))
