@@ -1,8 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from collections import namedtuple
-Item = namedtuple("Item", ['index', 'value', 'weight'])
+from Item import ItemList, Item
 
 def solve_it(input_data):
     # Modify this code to run your optimization algorithm
@@ -14,13 +13,20 @@ def solve_it(input_data):
     item_count = int(firstLine[0])
     capacity = int(firstLine[1])
 
-    items = []
+    items = ItemList(item_count, capacity)
 
     for i in range(1, item_count+1):
         line = lines[i]
         parts = line.split()
-        items.append(Item(i-1, int(parts[0]), int(parts[1])))
+        items.insert(Item(i-1, int(parts[0]), int(parts[1])))
 
+    items.heapify()
+    items.DP()
+
+    print '-------'
+    print items.totalValue
+    print items.taken
+    print '-----'
     # a trivial greedy algorithm for filling the knapsack
     # it takes items in-order until the knapsack is full
     value = 0
